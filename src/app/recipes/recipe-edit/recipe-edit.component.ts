@@ -27,7 +27,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
         this.subscription = this.route.params.subscribe(
             (params: any) => {
                 if (params.hasOwnProperty('id')) {
-                    console.log(+params['id'])
                     this.recipeIndex = +params['id'];
                     this.isNew = false;
                     this.recipe = this.recipeService.getRecipe(this.recipeIndex);
@@ -51,6 +50,24 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
     onCancel() {
         this.navigateBack();
+    }
+
+    onAddItem(name: string, amount: string, group: string) {
+        const ingredientsArray  = (<FormArray>this.recipeForm.controls['ingredients']);
+        ingredientsArray.push(
+            new FormGroup({
+                name: new FormControl(name, Validators.required),
+                amount: new FormControl(amount, [
+                    Validators.required,
+                    Validators.pattern("\\d+")
+                ])
+            })
+        )
+        //ingredientsArray[ingredientsArray.length - 1].reset();
+    }
+
+    onRemoveItem(index: number) {
+        (<FormArray>this.recipeForm.controls['ingredients']).removeAt(index);
     }
 
     private navigateBack() {
