@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'rb-recipe-start',
-  template: `
+    selector: 'rb-recipe-start',
+    template: `
     <h1>Please select a recipe</h1>
   `,
-  styles: []
+    styles: []
 })
 export class RecipeStartComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

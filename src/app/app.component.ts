@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { HeaderComponent } from './header.component';
-import { RecipesComponent } from './recipes/recipes.component';
+import {HeaderComponent} from './header.component';
+import {RecipesComponent} from './recipes/recipes.component';
 
 @Component({
-  selector: 'rb-root',
-  templateUrl: './app.component.html',
+    selector: 'rb-root',
+    templateUrl: './app.component.html',
 })
 export class AppComponent {
 
