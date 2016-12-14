@@ -1,9 +1,14 @@
-import {Injectable} from '@angular/core';
+///<reference path="../../../node_modules/rxjs/add/operator/map.d.ts"/>
+import {Injectable, EventEmitter} from '@angular/core';
 import {Recipe} from "./recipe";
 import {Ingredient} from "../shared/ingredient";
+import {Headers, Http, Response} from "@angular/http";
+import  'rxjs/Rx';
 
 @Injectable()
 export class RecipeService {
+
+    recipesChanged = new EventEmitter<Recipe[]>();
 
     private recipes: Recipe[] = [
         new Recipe("chili", "NM green chili", "http://www.specialtyproduce.com/sppics/9991.png", [
@@ -16,7 +21,7 @@ export class RecipeService {
         ]),
     ];
 
-    constructor() {
+    constructor( private http: Http) {
     }
 
     getRecipes() {
@@ -37,5 +42,25 @@ export class RecipeService {
 
     editRecipe(oldRecipe: Recipe, newRecipe: Recipe) {
         this.recipes[this.recipes.indexOf(oldRecipe)] = newRecipe;
+    }
+
+    storeData(){
+        const body = JSON.stringify(this.recipes);
+        const headers = new Headers({
+            'Content-Type': 'application/json'
+        })
+        return this.http.put('https://recipebook-6135b.firebaseio.com/recipes.json', body, {headers: headers});
+    }
+
+    fetchData(){
+
+        return this.http.get('https://recipebook-6135b.firebaseio.com/recipes.json')
+            .map((response: Response) => response.json())
+            .subscribe(
+                (data: Recipe[]) => {
+                    this.recipes = data;
+                    this.recipesChanged.emit(this.recipes);
+                }
+            );
     }
 }
