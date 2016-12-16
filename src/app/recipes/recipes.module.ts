@@ -7,11 +7,13 @@ import {RecipeItemComponent} from "./recipe-list/recipe-item.component";
 import {RecipesComponent} from "./recipes.component";
 import {RecipeListComponent} from "./recipe-list/recipe-list.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {recipesRouting} from "./recipes.routing";
 
 @NgModule({
     imports: [
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        recipesRouting
     ],
     declarations: [
         RecipesComponent,

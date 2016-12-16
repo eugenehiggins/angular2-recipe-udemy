@@ -10,7 +10,7 @@ import {RecipeService} from "./recipes/recipe.service";
 import {ShoppingListService} from "./shopping-list/shopping-list.service";
 import {routing} from "./app.routing";
 import {ShoppingListModule} from "./shopping-list/shopping-list.module";
-import {RecipesModule} from "./recipes/recipes.module";
+import { HomeComponent } from './home.component';
 
 
 @NgModule({
@@ -18,14 +18,14 @@ import {RecipesModule} from "./recipes/recipes.module";
         AppComponent,
         HeaderComponent,
         DropdownDirective,
+        HomeComponent,
     ],
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpModule,
         routing,
-        ShoppingListModule,
-        RecipesModule
+        ShoppingListModule
     ],
     providers: [
         RecipeService,
